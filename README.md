@@ -21,10 +21,10 @@ Demonstrates inter-service communication using modern Spring practices (no depre
 |                                   |
 |   POST /api/bookings              |
 +-----------------------------------+
-|
-v
+                    |
+                    v
 +-----------------------------------+      +---------------------+
-|       Booking Service (8086)      |<---->|   Payment Service   |
+|       Booking Service (8080)      |<---->|   Payment Service   |
 |       (Main Orchestrator)         |      |       (8084)        |
 |                                   |      +---------------------+
 |  WebClient → User Service         |               ^
@@ -32,16 +32,18 @@ v
 |  Feign Client → Hotel Service     |               |
 |  WebClient → Notification Service |               |
 +-----------------------------------+               |
-|          |          |          |        |
-v          v          v          v        v
+          |          |          |          |        |
+          v          v          v          v        v
 +----------+  +----------+  +----------+  +----------+  +---------------------+
 | User     |  | Flight   |  | Hotel    |  | Notification|  | (Payment response) |
 | Service  |  | Service  |  | Service  |  | Service    |  |                     |
 | (8081)   |  | (8082)   |  | (8083)   |  | (8085)     |  |                     |
 +----------+  +----------+  +----------+  +----------+  +---------------------+
-^          ^          ^          ^
-|          |          |          |
-+----------+----------+----------+
+          ^          ^          ^          ^
+          |          |          |          |
+          +----------+----------+----------+
+                        PostgreSQL
+              (6 separate databases)
 
 ## Features & Communication Rules (as per assignment)
 
