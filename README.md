@@ -16,34 +16,7 @@ Demonstrates inter-service communication using modern Spring practices (no depre
 
 ## Architecture Diagram
 
-+-----------------------------------+
-|          Client (Postman)         |
-|                                   |
-|   POST /api/bookings              |
-+-----------------------------------+
-                    |
-                    v
-+-----------------------------------+      +---------------------+
-|       Booking Service (8080)      |<---->|   Payment Service   |
-|       (Main Orchestrator)         |      |       (8084)        |
-|                                   |      +---------------------+
-|  WebClient → User Service         |               ^
-|  Feign Client → Flight Service    |               |
-|  Feign Client → Hotel Service     |               |
-|  WebClient → Notification Service |               |
-+-----------------------------------+               |
-          |          |          |          |        |
-          v          v          v          v        v
-+----------+  +----------+  +----------+  +----------+  +---------------------+
-| User     |  | Flight   |  | Hotel    |  | Notification|  | (Payment response) |
-| Service  |  | Service  |  | Service  |  | Service    |  |                     |
-| (8081)   |  | (8082)   |  | (8083)   |  | (8085)     |  |                     |
-+----------+  +----------+  +----------+  +----------+  +---------------------+
-          ^          ^          ^          ^
-          |          |          |          |
-          +----------+----------+----------+
-                        PostgreSQL
-              (6 separate databases)
+![Architecture Diagram](architecture-diagram.png)
 
 ## Features & Communication Rules (as per assignment)
 
